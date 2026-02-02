@@ -47,33 +47,33 @@
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 25px;
-            max-width: 450px;
+            padding: 40px;
+            max-width: 500px;
             width: 100%;
         }
 
         h1 {
             color: #667eea;
             text-align: center;
-            margin-bottom: 20px;
-            font-size: 24px;
+            margin-bottom: 30px;
+            font-size: 28px;
         }
 
         .controls {
             display: flex;
-            gap: 8px;
-            margin-top: 20px;
+            gap: 15px;
+            margin-top: 30px;
         }
 
         button {
-            padding: 12px 8px;
+            flex: 1;
+            padding: 15px;
             border: none;
             border-radius: 8px;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            min-width: 45px;
         }
 
         button:disabled {
@@ -84,7 +84,6 @@
         #settingsBtn {
             background: #95a5a6;
             color: white;
-            flex: 0 0 45px;
         }
 
         #settingsBtn:hover {
@@ -92,37 +91,19 @@
             transform: translateY(-2px);
         }
 
-        .preset-quick-btn {
-            background: #3498db;
-            color: white;
-            flex: 0 0 45px;
-            font-size: 13px;
-        }
-
-        .preset-quick-btn:hover:not(:disabled) {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-
-        .preset-quick-btn:disabled {
-            background: #bdc3c7;
-        }
-
         #startBtn {
-            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            flex: 1;
         }
 
         #startBtn:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
         #stopBtn {
             background: #e74c3c;
             color: white;
-            flex: 1;
         }
 
         #stopBtn:hover:not(:disabled) {
@@ -152,10 +133,10 @@
         .modal-content {
             background: white;
             border-radius: 20px;
-            padding: 30px;
-            max-width: 550px;
+            padding: 40px;
+            max-width: 600px;
             width: 90%;
-            max-height: 85vh;
+            max-height: 90vh;
             overflow-y: auto;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
@@ -164,12 +145,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .modal-header h2 {
             color: #667eea;
-            font-size: 22px;
+            font-size: 24px;
         }
 
         .close-btn {
@@ -191,39 +172,33 @@
         }
 
         .parameter-group {
-            margin-bottom: 18px;
+            margin-bottom: 25px;
         }
 
         label {
             display: block;
             color: #555;
             font-weight: 600;
-            margin-bottom: 6px;
-            font-size: 13px;
+            margin-bottom: 8px;
+            font-size: 14px;
         }
 
         .input-wrapper {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
         input[type="number"],
         input[type="text"],
-        textarea,
-        select {
+        textarea {
             flex: 1;
-            padding: 10px;
+            padding: 12px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
-            font-size: 15px;
+            font-size: 16px;
             transition: border-color 0.3s;
             font-family: inherit;
-        }
-
-        select {
-            cursor: pointer;
-            background: white;
         }
 
         textarea {
@@ -233,8 +208,7 @@
 
         input[type="number"]:focus,
         input[type="text"]:focus,
-        textarea:focus,
-        select:focus {
+        textarea:focus {
             outline: none;
             border-color: #667eea;
         }
@@ -247,105 +221,15 @@
             font-size: 16px;
         }
 
-        /* Presets Section Styles */
-        .presets-section {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 18px;
-        }
-
-        .presets-section h3 {
-            color: #667eea;
-            font-size: 16px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .preset-controls {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .preset-controls select {
-            flex: 2;
-        }
-
-        .preset-controls button {
-            flex: 1;
-            padding: 8px;
-            font-size: 13px;
-        }
-
-        .preset-btn-load {
-            background: #3498db;
-            color: white;
-        }
-
-        .preset-btn-load:hover:not(:disabled) {
-            background: #2980b9;
-        }
-
-        .preset-btn-save {
-            background: #27ae60;
-            color: white;
-        }
-
-        .preset-btn-save:hover:not(:disabled) {
-            background: #229954;
-        }
-
-        .preset-btn-delete {
-            background: #e74c3c;
-            color: white;
-        }
-
-        .preset-btn-delete:hover:not(:disabled) {
-            background: #c0392b;
-        }
-
-        .preset-name-input {
-            display: none;
-            margin-top: 8px;
-        }
-
-        .preset-name-input.active {
-            display: flex;
-            gap: 8px;
-        }
-
-        .preset-name-input input {
-            flex: 2;
-        }
-
-        .preset-name-input button {
-            flex: 1;
-            padding: 8px;
-            font-size: 13px;
-        }
-
-        .preset-info {
-            background: #e8f5e9;
-            border-left: 4px solid #27ae60;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            color: #2d6a2f;
-            margin-top: 8px;
-        }
-
         .theme-selector {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-top: 8px;
+            gap: 10px;
+            margin-top: 10px;
         }
 
         .theme-option {
-            padding: 12px;
+            padding: 15px;
             border: 3px solid transparent;
             border-radius: 10px;
             cursor: pointer;
@@ -353,7 +237,6 @@
             font-weight: 600;
             transition: all 0.3s;
             color: white;
-            font-size: 13px;
         }
 
         .theme-option:hover {
@@ -374,8 +257,8 @@
 
         .modal-actions {
             display: flex;
-            gap: 12px;
-            margin-top: 20px;
+            gap: 15px;
+            margin-top: 30px;
         }
 
         .save-btn {
@@ -408,7 +291,7 @@
             z-index: 2000;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             transition: background 0.5s ease;
-            padding: 25px 15px;
+            padding: 60px;
             overflow-y: auto;
         }
 
@@ -428,15 +311,15 @@
         .progress-content {
             text-align: center;
             color: white;
-            padding: 15px;
-            max-width: 900px;
+            padding: 40px;
+            max-width: 1000px;
             width: 100%;
         }
 
         .current-count {
-            font-size: 100px;
+            font-size: 200px;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 40px;
             text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             animation: pulse 1s ease-in-out infinite;
             line-height: 1;
@@ -448,24 +331,24 @@
         }
 
         .repeat-indicator {
-            font-size: 24px;
+            font-size: 40px;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 25px;
             text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .status-text {
-            font-size: 18px;
-            margin-bottom: 20px;
+            font-size: 26px;
+            margin-bottom: 50px;
             opacity: 0.9;
         }
 
         .progress-bar-container {
             background: rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            height: 30px;
+            border-radius: 20px;
+            height: 50px;
             overflow: hidden;
-            margin-bottom: 12px;
+            margin-bottom: 25px;
             backdrop-filter: blur(10px);
         }
 
@@ -478,35 +361,35 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 20px;
             color: #333;
         }
 
         .progress-text {
-            font-size: 16px;
-            margin-bottom: 15px;
+            font-size: 22px;
+            margin-bottom: 30px;
             font-weight: 600;
         }
 
         .timer-display {
             background: rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 20px;
+            padding: 40px;
             backdrop-filter: blur(10px);
-            margin-bottom: 20px;
-            margin-top: 15px;
+            margin-bottom: 50px;
+            margin-top: 30px;
         }
 
         .timer-label {
-            font-size: 14px;
-            margin-bottom: 8px;
+            font-size: 20px;
+            margin-bottom: 15px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             opacity: 0.9;
         }
 
         .timer-value {
-            font-size: 48px;
+            font-size: 80px;
             font-weight: 700;
             font-family: 'Courier New', monospace;
             text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -528,29 +411,29 @@
 
         .fullscreen-controls {
             display: flex;
-            gap: 15px;
+            gap: 40px;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 40px;
             flex-wrap: wrap;
         }
 
         .fullscreen-controls button {
             background: rgba(255, 255, 255, 0.25);
             color: white;
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            padding: 12px 30px;
-            font-size: 16px;
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            padding: 25px 70px;
+            font-size: 24px;
             backdrop-filter: blur(10px);
-            min-width: 120px;
+            min-width: 200px;
             font-weight: 700;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
         .fullscreen-controls button:hover:not(:disabled) {
             background: rgba(255, 255, 255, 0.35);
             border-color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
         }
 
         .fullscreen-controls button:disabled {
@@ -565,30 +448,31 @@
 
         .fullscreen-controls .start-btn:hover:not(:disabled) {
             background: rgba(76, 175, 80, 0.6);
-            border-color: rgb(76, 175, 80);
+            border-color: #4CAF50;
         }
 
         .fullscreen-controls .stop-btn {
-            background: rgba(231, 76, 60, 0.4);
-            border-color: rgba(231, 76, 60, 0.9);
+            background: rgba(244, 67, 54, 0.4);
+            border-color: rgba(244, 67, 54, 0.9);
         }
 
         .fullscreen-controls .stop-btn:hover:not(:disabled) {
-            background: rgba(231, 76, 60, 0.6);
-            border-color: rgb(231, 76, 60);
+            background: rgba(244, 67, 54, 0.6);
+            border-color: #f44336;
         }
 
+        /* Settings button in top-right corner */
         .settings-floating-btn {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
+            top: 30px;
+            right: 30px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.25);
             color: white;
             border: 3px solid rgba(255, 255, 255, 0.6);
-            font-size: 28px;
+            font-size: 36px;
             backdrop-filter: blur(10px);
             cursor: pointer;
             display: flex;
@@ -701,12 +585,9 @@
         <h1>🔢 Voice Counting Program</h1>
 
         <div class="controls">
-            <button id="settingsBtn">⚙️</button>
-            <button id="preset1Btn" class="preset-quick-btn" title="Load Preset 1">P1</button>
-            <button id="preset2Btn" class="preset-quick-btn" title="Load Preset 2">P2</button>
-            <button id="preset3Btn" class="preset-quick-btn" title="Load Preset 3">P3</button>
-            <button id="startBtn">▶</button>
-            <button id="stopBtn" disabled>⏹</button>
+            <button id="settingsBtn">⚙️ Settings</button>
+            <button id="startBtn">▶ Start</button>
+            <button id="stopBtn" disabled>⏹ Stop</button>
         </div>
     </div>
 
@@ -716,27 +597,6 @@
             <div class="modal-header">
                 <h2>⚙️ Settings</h2>
                 <button class="close-btn">&times;</button>
-            </div>
-
-            <!-- Presets Section -->
-            <div class="presets-section">
-                <h3>💾 Presets</h3>
-                <div class="preset-controls">
-                    <select id="presetSelect">
-                        <option value="">-- Select a Preset --</option>
-                    </select>
-                    <button id="loadPresetBtn" class="preset-btn-load" disabled>Load</button>
-                    <button id="savePresetBtn" class="preset-btn-save">Save As...</button>
-                    <button id="deletePresetBtn" class="preset-btn-delete" disabled>Delete</button>
-                </div>
-                <div id="presetNameInput" class="preset-name-input">
-                    <input type="text" id="newPresetName" placeholder="Enter preset name...">
-                    <button id="confirmSaveBtn" class="preset-btn-save">✓ Save</button>
-                    <button id="cancelSaveBtn" class="cancel-btn">✗ Cancel</button>
-                </div>
-                <div class="preset-info">
-                    💡 Save your favorite configurations as presets for quick access!
-                </div>
             </div>
 
             <div class="parameter-group">
@@ -788,97 +648,77 @@
                 </div>
             </div>
 
-            <div class="warning">
-                ⚠️ Make sure your device volume is turned on and not muted!
+            <div class="warning" id="warning" style="display: none;">
+                ⚠️ Speed too fast! Numbers will be skipped for clarity.
             </div>
 
             <div class="modal-actions">
-                <button class="cancel-btn" id="cancelBtn">Cancel</button>
-                <button class="save-btn" id="saveBtn">Save Settings</button>
+                <button class="save-btn">💾 Save Settings</button>
+                <button class="cancel-btn">✕ Cancel</button>
             </div>
         </div>
     </div>
 
     <!-- Fullscreen Progress Screen -->
     <div id="progressScreen" class="progress-screen">
-        <button id="fullscreenSettingsBtn" class="settings-floating-btn">⚙️</button>
+        <button class="settings-floating-btn" id="fullscreenSettingsBtn">⚙️</button>
         
         <div class="progress-content">
-            <div class="current-count" id="currentCountDisplay">-</div>
-            <div class="repeat-indicator" id="repeatIndicator">Ready to Start</div>
-            <div class="status-text" id="statusText">Press Start to Begin</div>
+            <div class="current-count" id="currentCount">-</div>
+            <div class="repeat-indicator" id="repeatIndicator">Repeat 0 of 0</div>
+            <div class="status-text" id="statusText">Ready to start</div>
             
             <div class="progress-bar-container">
                 <div class="progress-bar" id="progressBar">0%</div>
             </div>
             <div class="progress-text" id="progressText">Overall Progress: 0%</div>
-
+            
             <div class="timer-display">
                 <div class="timer-label">Elapsed Time</div>
                 <div class="timer-value" id="timerDisplay">00:00</div>
             </div>
-            
+
             <div class="fullscreen-controls">
-                <button id="fullscreenStartBtn" class="start-btn">▶ Start</button>
-                <button id="fullscreenStopBtn" class="stop-btn" disabled>⏹ Stop</button>
+                <button class="start-btn" id="fullscreenStartBtn">▶ Start</button>
+                <button class="stop-btn" id="fullscreenStopBtn" disabled>⏹ Stop</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Elements
-        const startBtn = document.getElementById('startBtn');
-        const stopBtn = document.getElementById('stopBtn');
-        const settingsBtn = document.getElementById('settingsBtn');
-        const settingsModal = document.getElementById('settingsModal');
-        const closeBtn = document.querySelector('.close-btn');
-        const saveBtn = document.getElementById('saveBtn');
-        const cancelBtn = document.getElementById('cancelBtn');
-        
-        // Preset quick buttons
-        const preset1Btn = document.getElementById('preset1Btn');
-        const preset2Btn = document.getElementById('preset2Btn');
-        const preset3Btn = document.getElementById('preset3Btn');
-        const presetQuickButtons = [preset1Btn, preset2Btn, preset3Btn];
-        
-        // Preset elements
-        const presetSelect = document.getElementById('presetSelect');
-        const loadPresetBtn = document.getElementById('loadPresetBtn');
-        const savePresetBtn = document.getElementById('savePresetBtn');
-        const deletePresetBtn = document.getElementById('deletePresetBtn');
-        const presetNameInput = document.getElementById('presetNameInput');
-        const newPresetName = document.getElementById('newPresetName');
-        const confirmSaveBtn = document.getElementById('confirmSaveBtn');
-        const cancelSaveBtn = document.getElementById('cancelSaveBtn');
-
-        // Fullscreen elements
-        const progressScreen = document.getElementById('progressScreen');
-        const fullscreenStartBtn = document.getElementById('fullscreenStartBtn');
-        const fullscreenStopBtn = document.getElementById('fullscreenStopBtn');
-        const fullscreenSettingsBtn = document.getElementById('fullscreenSettingsBtn');
-        
-        // Display elements
-        const currentCountDisplay = document.getElementById('currentCountDisplay');
-        const repeatIndicator = document.getElementById('repeatIndicator');
-        const statusText = document.getElementById('statusText');
-        const progressBar = document.getElementById('progressBar');
-        const progressText = document.getElementById('progressText');
-        const timerDisplay = document.getElementById('timerDisplay');
-
-        // Parameter inputs
+        // Get elements
         const maxCountInput = document.getElementById('maxCount');
         const repeatCountInput = document.getElementById('repeatCount');
         const speedInput = document.getElementById('speed');
         const intervalInput = document.getElementById('interval');
         const customTextInput = document.getElementById('customText');
         
-        // Display spans
         const maxCountDisplay = document.getElementById('maxCountDisplay');
         const repeatCountDisplay = document.getElementById('repeatCountDisplay');
         const speedDisplay = document.getElementById('speedDisplay');
         const intervalDisplay = document.getElementById('intervalDisplay');
+        
+        const settingsBtn = document.getElementById('settingsBtn');
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const fullscreenSettingsBtn = document.getElementById('fullscreenSettingsBtn');
+        const fullscreenStartBtn = document.getElementById('fullscreenStartBtn');
+        const fullscreenStopBtn = document.getElementById('fullscreenStopBtn');
+        const currentCountDisplay = document.getElementById('currentCount');
+        const statusText = document.getElementById('statusText');
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('progressText');
+        const warning = document.getElementById('warning');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const repeatIndicator = document.getElementById('repeatIndicator');
 
-        // Theme options
+        const settingsModal = document.getElementById('settingsModal');
+        const closeBtn = document.querySelector('.close-btn');
+        const saveBtn = document.querySelector('.save-btn');
+        const cancelBtn = document.querySelector('.cancel-btn');
+        
+        const progressScreen = document.getElementById('progressScreen');
+
         const themeOptions = document.querySelectorAll('.theme-option');
 
         // State variables
@@ -886,33 +726,12 @@
         let currentRepeat = 0;
         let currentNumber = 0;
         let timeoutId = null;
-        let returnToProgressScreen = false;
-        
-        // Timer variables
+        let timerInterval = null;
         let startTime = 0;
         let elapsedTime = 0;
-        let timerInterval = null;
-
-        // Speech synthesis
-        const synthesis = window.speechSynthesis;
+        let synthesis = window.speechSynthesis;
         let femaleVoice = null;
-
-        // Load available voices
-        function loadVoices() {
-            const voices = synthesis.getVoices();
-            femaleVoice = voices.find(voice => 
-                voice.name.includes('Female') || 
-                voice.name.includes('Samantha') ||
-                voice.name.includes('Victoria') ||
-                voice.name.includes('Google US English Female') ||
-                voice.name.includes('Microsoft Zira')
-            ) || voices[0];
-        }
-
-        synthesis.addEventListener('voiceschanged', loadVoices);
-        loadVoices();
-
-        // Settings object
+        let returnToProgressScreen = false;
         let savedSettings = {
             maxCount: 10,
             repeatCount: 10,
@@ -922,246 +741,33 @@
             theme: 'purple'
         };
 
-        // Presets storage
-        let presets = {};
-
-        // Load presets from localStorage
-        function loadPresets() {
-            const savedPresets = localStorage.getItem('voiceCountingPresets');
-            if (savedPresets) {
-                try {
-                    presets = JSON.parse(savedPresets);
-                    updatePresetSelect();
-                } catch (e) {
-                    console.error('Error loading presets:', e);
-                    presets = {};
-                }
-            }
+        // Initialize female voice
+        function initVoice() {
+            const voices = synthesis.getVoices();
+            femaleVoice = voices.find(voice => 
+                voice.name.toLowerCase().includes('female') || 
+                voice.name.toLowerCase().includes('zira') ||
+                voice.name.toLowerCase().includes('samantha') ||
+                voice.name.toLowerCase().includes('victoria') ||
+                voice.name.toLowerCase().includes('google uk english female')
+            ) || voices.find(voice => voice.lang.startsWith('en')) || voices[0];
         }
 
-        // Save presets to localStorage
-        function savePresetsToStorage() {
-            localStorage.setItem('voiceCountingPresets', JSON.stringify(presets));
+        if (synthesis.onvoiceschanged !== undefined) {
+            synthesis.onvoiceschanged = initVoice;
         }
+        initVoice();
 
-        // Update preset select dropdown
-        function updatePresetSelect() {
-            // Clear existing options except the first one
-            while (presetSelect.options.length > 1) {
-                presetSelect.remove(1);
-            }
-            
-            // Add preset options
-            Object.keys(presets).sort().forEach(presetName => {
-                const option = document.createElement('option');
-                option.value = presetName;
-                option.textContent = presetName;
-                presetSelect.appendChild(option);
-            });
-            
-            // Update quick access buttons
-            updatePresetQuickButtons();
-        }
-
-        // Update preset quick buttons with first 3 presets
-        function updatePresetQuickButtons() {
-            const presetNames = Object.keys(presets).sort();
-            
-            presetQuickButtons.forEach((btn, index) => {
-                if (presetNames[index]) {
-                    btn.textContent = presetNames[index].substring(0, 8);
-                    btn.title = `Load preset: ${presetNames[index]}`;
-                    btn.disabled = false;
-                    btn.style.display = '';
-                } else {
-                    btn.textContent = `P${index + 1}`;
-                    btn.title = 'No preset assigned';
-                    btn.disabled = true;
-                    btn.style.display = '';
-                }
-            });
-        }
-
-        // Load preset from quick button
-        function loadPresetQuick(index) {
-            const presetNames = Object.keys(presets).sort();
-            const presetName = presetNames[index];
-            
-            if (presetName && presets[presetName]) {
-                savedSettings = {...presets[presetName]};
-                applySettings();
-                localStorage.setItem('voiceCountingSettings', JSON.stringify(savedSettings));
-                
-                // Visual feedback
-                const btn = presetQuickButtons[index];
-                const originalBg = btn.style.background;
-                btn.style.background = '#27ae60';
-                setTimeout(() => {
-                    btn.style.background = originalBg;
-                }, 500);
-            }
-        }
-
-        // Attach event listeners to preset quick buttons
-        presetQuickButtons.forEach((btn, index) => {
-            btn.addEventListener('click', () => loadPresetQuick(index));
-        });
-
-        // Get current settings from inputs
-        function getCurrentSettings() {
-            return {
-                maxCount: parseInt(maxCountInput.value),
-                repeatCount: parseInt(repeatCountInput.value),
-                speed: parseFloat(speedInput.value),
-                interval: parseFloat(intervalInput.value),
-                customText: customTextInput.value || 'Repetition',
-                theme: document.querySelector('.theme-option.active').dataset.theme
-            };
-        }
-
-        // Apply settings to inputs
-        function applySettingsToInputs(settings) {
-            maxCountInput.value = settings.maxCount;
-            repeatCountInput.value = settings.repeatCount;
-            speedInput.value = settings.speed;
-            intervalInput.value = settings.interval;
-            customTextInput.value = settings.customText;
-            
-            updateDisplayValues();
-            
-            // Update theme
-            themeOptions.forEach(option => {
-                option.classList.remove('active');
-                if (option.dataset.theme === settings.theme) {
-                    option.classList.add('active');
-                }
-            });
-        }
-
-        // Preset select change handler
-        presetSelect.addEventListener('change', () => {
-            const hasSelection = presetSelect.value !== '';
-            loadPresetBtn.disabled = !hasSelection;
-            deletePresetBtn.disabled = !hasSelection;
-        });
-
-        // Load preset button handler
-        loadPresetBtn.addEventListener('click', () => {
-            const presetName = presetSelect.value;
-            if (presetName && presets[presetName]) {
-                applySettingsToInputs(presets[presetName]);
-                alert(`✓ Preset "${presetName}" loaded successfully!`);
-            }
-        });
-
-        // Save preset button handler
-        savePresetBtn.addEventListener('click', () => {
-            presetNameInput.classList.add('active');
-            newPresetName.value = '';
-            newPresetName.focus();
-        });
-
-        // Confirm save preset handler
-        confirmSaveBtn.addEventListener('click', () => {
-            const presetName = newPresetName.value.trim();
-            
-            if (!presetName) {
-                alert('⚠️ Please enter a preset name!');
-                return;
-            }
-            
-            if (presets[presetName]) {
-                if (!confirm(`A preset named "${presetName}" already exists. Do you want to overwrite it?`)) {
-                    return;
-                }
-            }
-            
-            // Save current settings as preset
-            presets[presetName] = getCurrentSettings();
-            savePresetsToStorage();
-            updatePresetSelect();
-            
-            // Select the newly saved preset
-            presetSelect.value = presetName;
-            loadPresetBtn.disabled = false;
-            deletePresetBtn.disabled = false;
-            
-            // Hide input field
-            presetNameInput.classList.remove('active');
-            
-            alert(`✓ Preset "${presetName}" saved successfully!`);
-        });
-
-        // Cancel save preset handler
-        cancelSaveBtn.addEventListener('click', () => {
-            presetNameInput.classList.remove('active');
-            newPresetName.value = '';
-        });
-
-        // Delete preset button handler
-        deletePresetBtn.addEventListener('click', () => {
-            const presetName = presetSelect.value;
-            
-            if (!presetName || !presets[presetName]) {
-                return;
-            }
-            
-            if (confirm(`Are you sure you want to delete the preset "${presetName}"?`)) {
-                delete presets[presetName];
-                savePresetsToStorage();
-                updatePresetSelect();
-                
-                presetSelect.value = '';
-                loadPresetBtn.disabled = true;
-                deletePresetBtn.disabled = true;
-                
-                alert(`✓ Preset "${presetName}" deleted successfully!`);
-            }
-        });
-
-        // Allow Enter key to save preset
-        newPresetName.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                confirmSaveBtn.click();
-            }
-        });
-
-        // Update display values
-        function updateDisplayValues() {
-            maxCountDisplay.textContent = maxCountInput.value;
-            repeatCountDisplay.textContent = repeatCountInput.value;
-            speedDisplay.textContent = parseFloat(speedInput.value).toFixed(1) + '/s';
-            intervalDisplay.textContent = parseFloat(intervalInput.value).toFixed(1) + 's';
-        }
-
-        // Input event listeners
-        maxCountInput.addEventListener('input', updateDisplayValues);
-        repeatCountInput.addEventListener('input', updateDisplayValues);
-        speedInput.addEventListener('input', updateDisplayValues);
-        intervalInput.addEventListener('input', updateDisplayValues);
-
-        // Theme selection
-        themeOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                themeOptions.forEach(opt => opt.classList.remove('active'));
-                option.classList.add('active');
-            });
-        });
-
-        // Load settings from localStorage
+        // Load saved settings from localStorage
         function loadSettings() {
-            const saved = localStorage.getItem('voiceCountingSettings');
+            const saved = localStorage.getItem('countingProgramSettings');
             if (saved) {
-                try {
-                    savedSettings = JSON.parse(saved);
-                } catch (e) {
-                    console.error('Error loading settings:', e);
-                }
+                savedSettings = JSON.parse(saved);
+                applySettings();
             }
-            applySettings();
         }
 
-        // Apply saved settings to UI
+        // Apply settings to UI
         function applySettings() {
             maxCountInput.value = savedSettings.maxCount;
             repeatCountInput.value = savedSettings.repeatCount;
@@ -1169,19 +775,13 @@
             intervalInput.value = savedSettings.interval;
             customTextInput.value = savedSettings.customText;
             
-            updateDisplayValues();
-
-            // Apply theme
-            const themeClass = `theme-${savedSettings.theme}`;
-            document.body.className = themeClass;
-            progressScreen.className = 'progress-screen ' + themeClass;
+            maxCountDisplay.textContent = savedSettings.maxCount;
+            repeatCountDisplay.textContent = savedSettings.repeatCount;
+            speedDisplay.textContent = savedSettings.speed.toFixed(1) + '/s';
+            intervalDisplay.textContent = savedSettings.interval.toFixed(1) + 's';
             
-            themeOptions.forEach(option => {
-                option.classList.remove('active');
-                if (option.dataset.theme === savedSettings.theme) {
-                    option.classList.add('active');
-                }
-            });
+            applyTheme(savedSettings.theme);
+            checkSpeedWarning(savedSettings.speed);
         }
 
         // Save settings to localStorage
@@ -1191,20 +791,61 @@
                 repeatCount: parseInt(repeatCountInput.value),
                 speed: parseFloat(speedInput.value),
                 interval: parseFloat(intervalInput.value),
-                customText: customTextInput.value || 'Repetition',
-                theme: document.querySelector('.theme-option.active').dataset.theme
+                customText: customTextInput.value.trim() || 'Repetition',
+                theme: savedSettings.theme
             };
+            localStorage.setItem('countingProgramSettings', JSON.stringify(savedSettings));
+        }
 
-            localStorage.setItem('voiceCountingSettings', JSON.stringify(savedSettings));
-            
-            // Apply theme
-            const themeClass = `theme-${savedSettings.theme}`;
-            document.body.className = themeClass;
-            progressScreen.className = 'progress-screen ' + themeClass;
-            if (progressScreen.classList.contains('active')) {
-                progressScreen.classList.add('active');
+        // Update displays when inputs change
+        maxCountInput.addEventListener('input', () => {
+            maxCountDisplay.textContent = maxCountInput.value;
+        });
+
+        repeatCountInput.addEventListener('input', () => {
+            repeatCountDisplay.textContent = repeatCountInput.value;
+        });
+
+        speedInput.addEventListener('input', () => {
+            const speed = parseFloat(speedInput.value);
+            speedDisplay.textContent = speed.toFixed(1) + '/s';
+            checkSpeedWarning(speed);
+        });
+
+        intervalInput.addEventListener('input', () => {
+            intervalDisplay.textContent = parseFloat(intervalInput.value).toFixed(1) + 's';
+        });
+
+        // Check if speed is too fast and show warning
+        function checkSpeedWarning(speed) {
+            if (speed > 2) {
+                warning.style.display = 'block';
+            } else {
+                warning.style.display = 'none';
             }
         }
+
+        // Theme handling
+        function applyTheme(theme) {
+            document.body.className = theme !== 'purple' ? `theme-${theme}` : '';
+            progressScreen.className = 'progress-screen' + (theme !== 'purple' ? ` theme-${theme}` : '');
+            
+            themeOptions.forEach(option => {
+                if (option.dataset.theme === theme) {
+                    option.classList.add('active');
+                } else {
+                    option.classList.remove('active');
+                }
+            });
+            
+            savedSettings.theme = theme;
+        }
+
+        themeOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                applyTheme(option.dataset.theme);
+            });
+        });
 
         // Modal handling
         settingsBtn.addEventListener('click', () => {
@@ -1390,6 +1031,7 @@
             fullscreenStartBtn.disabled = false;
             fullscreenStopBtn.disabled = true;
             fullscreenSettingsBtn.disabled = false;
+            //speak(`All ${savedSettings.repeatCount} repetitions complete`);
             speak(`All complete`);
         }
 
@@ -1451,10 +1093,8 @@
         stopBtn.addEventListener('click', handleStop);
         fullscreenStopBtn.addEventListener('click', handleStop);
 
-        // Load presets and settings on startup
-        loadPresets();
+        // Load settings on startup
         loadSettings();
-        updatePresetQuickButtons();
         
         // Show progress screen by default
         progressScreen.classList.add('active');
