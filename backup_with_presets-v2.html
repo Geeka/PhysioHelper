@@ -61,13 +61,8 @@
 
         .controls {
             display: flex;
-<<<<<<< HEAD
-            gap: 15px;
-            margin-top: 30px;ķ
-=======
             gap: 8px;
             margin-top: 20px;
->>>>>>> 50c413f250dad2b979faaad99de87e17da60b023
         }
 
         button {
@@ -616,6 +611,42 @@
             cursor: not-allowed;
         }
 
+        .preset-buttons-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        .preset-fullscreen-btn {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            padding: 12px 24px;
+            font-size: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            font-weight: 700;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            flex: 1;
+            max-width: 150px;
+        }
+
+        .preset-fullscreen-btn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.35);
+            border-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .preset-fullscreen-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
         .warning {
             background: rgba(255, 243, 205, 0.9);
             border: 2px solid #ffc107;
@@ -730,8 +761,7 @@
                     <select id="presetSelect">
                         <option value="">-- Select a Preset --</option>
                     </select>
-                    <button id="loadPresetBtn" class="preset-btn-load" disabled>Load</button>
-                    <button id="savePresetBtn" class="preset-btn-save">Save As...</button>
+                    <button id="savePresetBtn" class="preset-btn-save">Save</button>
                     <button id="deletePresetBtn" class="preset-btn-delete" disabled>Delete</button>
                 </div>
                 <div id="presetNameInput" class="preset-name-input">
@@ -818,6 +848,13 @@
             </div>
             <div class="progress-text" id="progressText">Overall Progress: 0%</div>
 
+            <!-- Preset Buttons Below Progress Bar -->
+            <div class="preset-buttons-container">
+                <button id="fullscreenPreset1" class="preset-fullscreen-btn" disabled>Preset 1</button>
+                <button id="fullscreenPreset2" class="preset-fullscreen-btn" disabled>Preset 2</button>
+                <button id="fullscreenPreset3" class="preset-fullscreen-btn" disabled>Preset 3</button>
+            </div>
+
             <div class="timer-display">
                 <div class="timer-label">Elapsed Time</div>
                 <div class="timer-value" id="timerDisplay">00:00</div>
@@ -848,7 +885,6 @@
         
         // Preset elements
         const presetSelect = document.getElementById('presetSelect');
-        const loadPresetBtn = document.getElementById('loadPresetBtn');
         const savePresetBtn = document.getElementById('savePresetBtn');
         const deletePresetBtn = document.getElementById('deletePresetBtn');
         const presetNameInput = document.getElementById('presetNameInput');
@@ -861,6 +897,10 @@
         const fullscreenStartBtn = document.getElementById('fullscreenStartBtn');
         const fullscreenStopBtn = document.getElementById('fullscreenStopBtn');
         const fullscreenSettingsBtn = document.getElementById('fullscreenSettingsBtn');
+        const fullscreenPreset1 = document.getElementById('fullscreenPreset1');
+        const fullscreenPreset2 = document.getElementById('fullscreenPreset2');
+        const fullscreenPreset3 = document.getElementById('fullscreenPreset3');
+        const fullscreenPresetButtons = [fullscreenPreset1, fullscreenPreset2, fullscreenPreset3];
         
         // Display elements
         const currentCountDisplay = document.getElementById('currentCountDisplay');
@@ -964,6 +1004,12 @@
                 presetSelect.appendChild(option);
             });
             
+            // Add "New Preset" option at the end
+            const newOption = document.createElement('option');
+            newOption.value = '__new__';
+            newOption.textContent = '+ New Preset';
+            presetSelect.appendChild(newOption);
+            
             // Update quick access buttons
             updatePresetQuickButtons();
         }
@@ -983,6 +1029,19 @@
                     btn.title = 'No preset assigned';
                     btn.disabled = true;
                     btn.style.display = '';
+                }
+            });
+            
+            // Update fullscreen preset buttons
+            fullscreenPresetButtons.forEach((btn, index) => {
+                if (presetNames[index]) {
+                    btn.textContent = presetNames[index];
+                    btn.title = `Click to load and start: ${presetNames[index]}`;
+                    btn.disabled = false;
+                } else {
+                    btn.textContent = `Save Preset ${index + 1}`;
+                    btn.title = 'Save a preset in Settings to enable this button';
+                    btn.disabled = true;
                 }
             });
         }
@@ -1007,9 +1066,50 @@
             }
         }
 
+        // Load preset and start automatically (for fullscreen preset buttons)
+        function loadPresetAndStart(index) {
+            const presetNames = Object.keys(presets).sort();
+            const presetName = presetNames[index];
+            
+            if (presetName && presets[presetName]) {
+                savedSettings = {...presets[presetName]};
+                applySettings();
+                localStorage.setItem('voiceCountingSettings', JSON.stringify(savedSettings));
+                
+                // Strong visual feedback - highlight the button
+                const btn = fullscreenPresetButtons[index];
+                const originalBg = btn.style.background;
+                const originalBorder = btn.style.borderColor;
+                const originalTransform = btn.style.transform;
+                
+                // Highlight effect
+                btn.style.background = 'rgba(46, 204, 113, 0.8)';
+                btn.style.borderColor = 'rgb(39, 174, 96)';
+                btn.style.transform = 'scale(1.05)';
+                btn.style.boxShadow = '0 0 20px rgba(46, 204, 113, 0.6)';
+                
+                // Start counting automatically after brief highlight
+                setTimeout(() => {
+                    handleStart();
+                    // Reset button style after starting
+                    setTimeout(() => {
+                        btn.style.background = originalBg;
+                        btn.style.borderColor = originalBorder;
+                        btn.style.transform = originalTransform;
+                        btn.style.boxShadow = '';
+                    }, 300);
+                }, 500);
+            }
+        }
+
         // Attach event listeners to preset quick buttons
         presetQuickButtons.forEach((btn, index) => {
             btn.addEventListener('click', () => loadPresetQuick(index));
+        });
+
+        // Attach event listeners to fullscreen preset buttons (auto-start)
+        fullscreenPresetButtons.forEach((btn, index) => {
+            btn.addEventListener('click', () => loadPresetAndStart(index));
         });
 
         // Get current settings from inputs
@@ -1043,27 +1143,74 @@
             });
         }
 
-        // Preset select change handler
+        // Preset select change handler - auto-load on selection
         presetSelect.addEventListener('change', () => {
-            const hasSelection = presetSelect.value !== '';
-            loadPresetBtn.disabled = !hasSelection;
-            deletePresetBtn.disabled = !hasSelection;
-        });
-
-        // Load preset button handler
-        loadPresetBtn.addEventListener('click', () => {
             const presetName = presetSelect.value;
-            if (presetName && presets[presetName]) {
-                applySettingsToInputs(presets[presetName]);
-                alert(`✓ Preset "${presetName}" loaded successfully!`);
+            const hasSelection = presetName !== '' && presetName !== '__new__';
+            
+            // Disable delete button for empty selection or "New Preset"
+            deletePresetBtn.disabled = !hasSelection;
+            
+            // If "New Preset" is selected, show name input and clear form
+            if (presetName === '__new__') {
+                presetNameInput.classList.add('active');
+                newPresetName.value = '';
+                newPresetName.focus();
+                
+                // Clear all form values to empty
+                maxCountInput.value = '';
+                repeatCountInput.value = '';
+                speedInput.value = '';
+                intervalInput.value = '';
+                customTextInput.value = '';
+                
+                // Clear display values
+                maxCountDisplay.textContent = '';
+                repeatCountDisplay.textContent = '';
+                speedDisplay.textContent = '';
+                intervalDisplay.textContent = '';
+                
+                // Reset theme to default (purple)
+                themeOptions.forEach(option => {
+                    option.classList.remove('active');
+                    if (option.dataset.theme === 'purple') {
+                        option.classList.add('active');
+                    }
+                });
+            } else {
+                // Hide name input if it was showing
+                presetNameInput.classList.remove('active');
+                
+                // Auto-load preset when selected
+                if (hasSelection && presets[presetName]) {
+                    applySettingsToInputs(presets[presetName]);
+                }
             }
         });
 
         // Save preset button handler
         savePresetBtn.addEventListener('click', () => {
-            presetNameInput.classList.add('active');
-            newPresetName.value = '';
-            newPresetName.focus();
+            const currentSelection = presetSelect.value;
+            
+            // If a preset is selected (not empty and not "__new__"), save to it
+            if (currentSelection && currentSelection !== '__new__' && presets[currentSelection]) {
+                // Validate all inputs before saving
+                if (!validateAllInputs()) {
+                    alert('⚠️ Please fix the validation errors before saving!');
+                    return;
+                }
+                
+                // Overwrite existing preset
+                presets[currentSelection] = getCurrentSettings();
+                savePresetsToStorage();
+                updatePresetQuickButtons();
+                alert(`✓ Preset "${currentSelection}" updated successfully!`);
+            } else {
+                // Show name input for new preset
+                presetNameInput.classList.add('active');
+                newPresetName.value = '';
+                newPresetName.focus();
+            }
         });
 
         // Confirm save preset handler
@@ -1072,6 +1219,12 @@
             
             if (!presetName) {
                 alert('⚠️ Please enter a preset name!');
+                return;
+            }
+            
+            // Validate all inputs before saving
+            if (!validateAllInputs()) {
+                alert('⚠️ Please fix the validation errors before saving!');
                 return;
             }
             
@@ -1088,7 +1241,6 @@
             
             // Select the newly saved preset
             presetSelect.value = presetName;
-            loadPresetBtn.disabled = false;
             deletePresetBtn.disabled = false;
             
             // Hide input field
@@ -1101,6 +1253,10 @@
         cancelSaveBtn.addEventListener('click', () => {
             presetNameInput.classList.remove('active');
             newPresetName.value = '';
+            // Reset dropdown if "New Preset" was selected
+            if (presetSelect.value === '__new__') {
+                presetSelect.value = '';
+            }
         });
 
         // Delete preset button handler
@@ -1117,7 +1273,6 @@
                 updatePresetSelect();
                 
                 presetSelect.value = '';
-                loadPresetBtn.disabled = true;
                 deletePresetBtn.disabled = true;
                 
                 alert(`✓ Preset "${presetName}" deleted successfully!`);
@@ -1139,11 +1294,72 @@
             intervalDisplay.textContent = parseFloat(intervalInput.value).toFixed(1) + 's';
         }
 
-        // Input event listeners
-        maxCountInput.addEventListener('input', updateDisplayValues);
-        repeatCountInput.addEventListener('input', updateDisplayValues);
-        speedInput.addEventListener('input', updateDisplayValues);
-        intervalInput.addEventListener('input', updateDisplayValues);
+        // Validation functions
+        function validateMaxCount() {
+            const value = parseInt(maxCountInput.value);
+            if (isNaN(value) || value < 1 || value > 100) {
+                maxCountInput.setCustomValidity('Please enter a number between 1 and 100');
+                return false;
+            }
+            maxCountInput.setCustomValidity('');
+            return true;
+        }
+
+        function validateRepeatCount() {
+            const value = parseInt(repeatCountInput.value);
+            if (isNaN(value) || value < 1 || value > 50) {
+                repeatCountInput.setCustomValidity('Please enter a number between 1 and 50');
+                return false;
+            }
+            repeatCountInput.setCustomValidity('');
+            return true;
+        }
+
+        function validateSpeed() {
+            const value = parseFloat(speedInput.value);
+            if (isNaN(value) || value < 0.5 || value > 10) {
+                speedInput.setCustomValidity('Please enter a number between 0.5 and 10');
+                return false;
+            }
+            speedInput.setCustomValidity('');
+            return true;
+        }
+
+        function validateInterval() {
+            const value = parseFloat(intervalInput.value);
+            if (isNaN(value) || value < 0.5 || value > 60) {
+                intervalInput.setCustomValidity('Please enter a number between 0.5 and 60');
+                return false;
+            }
+            intervalInput.setCustomValidity('');
+            return true;
+        }
+
+        function validateAllInputs() {
+            const valid = validateMaxCount() && validateRepeatCount() && validateSpeed() && validateInterval();
+            return valid;
+        }
+
+        // Input event listeners with validation
+        maxCountInput.addEventListener('input', () => {
+            validateMaxCount();
+            updateDisplayValues();
+        });
+        
+        repeatCountInput.addEventListener('input', () => {
+            validateRepeatCount();
+            updateDisplayValues();
+        });
+        
+        speedInput.addEventListener('input', () => {
+            validateSpeed();
+            updateDisplayValues();
+        });
+        
+        intervalInput.addEventListener('input', () => {
+            validateInterval();
+            updateDisplayValues();
+        });
 
         // Theme selection
         themeOptions.forEach(option => {
@@ -1239,6 +1455,12 @@
         });
 
         saveBtn.addEventListener('click', () => {
+            // Validate all inputs before saving
+            if (!validateAllInputs()) {
+                alert('⚠️ Please fix the validation errors before saving!');
+                return;
+            }
+            
             saveSettings();
             settingsModal.classList.remove('active');
             if (returnToProgressScreen) {
@@ -1395,6 +1617,7 @@
             fullscreenStartBtn.disabled = false;
             fullscreenStopBtn.disabled = true;
             fullscreenSettingsBtn.disabled = false;
+            updatePresetQuickButtons(); // Re-enable preset buttons based on availability
             speak(`All complete`);
         }
 
@@ -1413,6 +1636,7 @@
             fullscreenStartBtn.disabled = true;
             fullscreenStopBtn.disabled = false;
             fullscreenSettingsBtn.disabled = true;
+            fullscreenPresetButtons.forEach(btn => btn.disabled = true);
             
             currentCountDisplay.textContent = '-';
             progressBar.style.width = '0%';
@@ -1446,6 +1670,7 @@
             fullscreenStartBtn.disabled = false;
             fullscreenStopBtn.disabled = true;
             fullscreenSettingsBtn.disabled = false;
+            updatePresetQuickButtons(); // Re-enable preset buttons based on availability
         }
 
         // Start buttons
